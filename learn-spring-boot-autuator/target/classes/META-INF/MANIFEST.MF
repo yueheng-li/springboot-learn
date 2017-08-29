@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: learn-spring-boot-autuator
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: chunhui.li
+Implementation-Vendor-Id: cn.learn.actuator
+Build-Jdk: 1.8.0_101
+Implementation-URL: http://projects.spring.io/spring-boot/learn-spring
+ -boot-autuator/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

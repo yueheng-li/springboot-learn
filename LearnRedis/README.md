@@ -29,18 +29,23 @@ spring.redis.pool.min-idle=0
 spring.redis.timeout=0  
 ```
 ## 启动工程 
-浏览器输入：http://127.0.0.1:8080/api/city/1
+### 浏览器输入：http://127.0.0.1:8080/api/city/1
+
 第一次请求和二次以后请求的log
+
 2017-09-18 16:04:34.342  INFO 12576 --- [io-8080-exec-10] c.j.l.r.service.impl.CityServiceImpl     : CityServiceImpl.findCityById() : 城市插入缓存 >> City{id=4, provinceId=9, cityName='Dalian', description='org.springframework'}
+
 2017-09-18 16:04:37.199  INFO 12576 --- [nio-8080-exec-2] c.j.l.r.service.impl.CityServiceImpl     : CityServiceImpl.findCityById() : 从缓存中获取了城市 >> City{id=4, provinceId=9, cityName='Dalian', description='org.springframework'}
 
-postman：
-http://127.0.0.1:8080/api/city/
+### postman：http://127.0.0.1:8080/api/city/
 headers：Content-Type=application/json
+
 body：row:JSON
+```json
 {
     "id": 4,
     "provinceId": 9,
     "cityName": "Dalian",
     "description": "org.springframework"
 }
+```

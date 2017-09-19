@@ -42,4 +42,19 @@ public class ArticleEsRestController {
         return service.findByTitleAndAbstracts(title, abstracts);
     }
 
+    /**
+     * 搜索返回分页结果
+     *
+     * @param pageNumber 当前页码
+     * @param pageSize 每页大小
+     * @param searchContent 搜索内容
+     * @return
+     */
+    @RequestMapping(value = "/api/art/search", method = RequestMethod.GET)
+    public List<Article> searchCity(@RequestParam(value = "pageNumber") Integer pageNumber,
+                                                @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                @RequestParam(value = "searchContent") String searchContent) {
+        return service.searchArticle(pageNumber, pageSize,searchContent);
+    }
+
 }

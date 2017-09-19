@@ -45,6 +45,9 @@ String indexStoreType() default "fs";//索引文件存储类型
 ## 通过ElasticSearchTest添加一条索引数据。
 
 http://127.0.0.1:8080//api/art/and/find?title=springboot&abstracts=springboot
+
+http://127.0.0.1:8080/api/art/search?searchContent=springboot&pageNumber=0&pageSize=10
+
 ```json
 [{"id":1,"title":"springboot integreate elasticsearch","abstracts":"springboot integreate elasticsearch is very easy","content":"elasticsearch based on lucene,spring-data-elastichsearch based on elaticsearch,this tutorial tell you how to integrete springboot with spring-data-elasticsearch","postTime":1505801353524,"clickCount":1,"author":{"id":1,"name":"lichunhui","remark":"java developer"},"tutorial":{"id":1,"name":"elastic search"}}]
 ```

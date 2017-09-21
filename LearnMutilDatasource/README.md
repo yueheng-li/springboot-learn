@@ -1,8 +1,11 @@
 多数据源使用，使用Druid和hikari作为数据源的连接池。
 
 ### Druid监控功能实现追加
+
+http://127.0.0.1:8080/druid2/login.html(admin2/123456)
+
+## application.properties修正
 ```
-application.properties
 ## 下面为连接池的补充设置，应用到上面所有数据源中
 ## 初始化大小，最小，最大
 #master.datasource.initialSize=5
@@ -28,7 +31,9 @@ master.datasource.filters=stat,wall,log4j
 master.datasource.connectionProperties=druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 # 合并多个DruidDataSource的监控数据
 master.datasource.useGlobalDataSourceStat=true
-
+```
+## MasterDataSourceConfig.java修正
+```
 	@Value("${master.datasource.filters}")
 	private String filters;
 	@Value("${master.datasource.connectionProperties}")
@@ -36,7 +41,7 @@ master.datasource.useGlobalDataSourceStat=true
 	@Value("${master.datasource.useGlobalDataSourceStat}")
 	private boolean useGlobalDataSourceStat;
 
-MasterDataSourceConfig.java
+
     @Bean(name="masterDataSource")
     @Primary
     public DataSource masterDataSource() {
@@ -63,8 +68,9 @@ MasterDataSourceConfig.java
         return dataSource;
     }
 
-
-DruidConfiguration.java
+```
+## DruidConfiguration.java追加
+```
 package cn.learn.mutil.datasource.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

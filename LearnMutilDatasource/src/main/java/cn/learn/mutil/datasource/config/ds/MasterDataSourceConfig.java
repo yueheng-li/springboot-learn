@@ -37,21 +37,36 @@ public class MasterDataSourceConfig {
     @Value("${master.datasource.driver-class-name}")
     private String driverClass;
 
+	@Value("${master.datasource.filters}")
+	private String filters;
+	@Value("${master.datasource.connectionProperties}")
+	private String connectionProperties;
+	@Value("${master.datasource.useGlobalDataSourceStat}")
+	private boolean useGlobalDataSourceStat;
+
     @Bean(name="masterDataSource")
     @Primary
     public DataSource masterDataSource() {
     	// Druid
-//    	DruidDataSource dataSource = new DruidDataSource();
-//        dataSource.setDriverClassName(driverClass);
-//        dataSource.setUrl(url);
-//        dataSource.setUsername(user);
-//        dataSource.setPassword(password);
-    	// hikari
-    	HikariDataSource dataSource = new HikariDataSource();
+    	DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(driverClass);
-        dataSource.setJdbcUrl(url);
+        dataSource.setUrl(url);
         dataSource.setUsername(user);
         dataSource.setPassword(password);
+        dataSource.setUseGlobalDataSourceStat(useGlobalDataSourceStat);
+        try {
+        	dataSource.setFilters(filters);
+        } catch (SQLException e) {
+            System.err.println("druid configuration initialization filter: "+ e);
+        }
+        dataSource.setConnectionProperties(connectionProperties);
+        
+    	// hikari
+//    	HikariDataSource dataSource = new HikariDataSource();
+//        dataSource.setDriverClassName(driverClass);
+//        dataSource.setJdbcUrl(url);
+//        dataSource.setUsername(user);
+//        dataSource.setPassword(password);
         return dataSource;
     }
 

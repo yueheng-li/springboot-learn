@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.learn.mutil.datasource.dao.cluster.UserDao">
+
+	<resultMap id="userMap" type="cn.learn.mutil.datasource.entity.User">
+		<result property="eid" column="eid" />
+		<result property="ename" column="ename" />
+		<result property="password" column="password" />
+	</resultMap>
+
+	<select id="findByName" parameterType="String"
+		resultMap="userMap">
+		select u.eid
+			,u.ename
+			,u.password
+		from User u
+		where u.eid= #{eid}
+	</select>
+
+</mapper>

@@ -1,0 +1,16 @@
+\\-- local mysql start
+-- mysqld --defaults-file=C:\lichunhui\mysql-5.6.36-winx64\my.ini --console
+-- create database myte;
+-- use myte;
+Drop table `user`;
+CREATE TABLE `user` (
+    `eid` VARCHAR(10) NOT NULL COLLATE 'utf8_unicode_ci',
+	`ename` VARCHAR(255) COLLATE 'utf8_unicode_ci',
+	`password` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`eid`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+insert into user (eid, ename, password) values ('10875177', 'chunhui.li', 'admin');
+insert into user (eid, ename, password) values ('10875188', 'chunhai.li', 'user');

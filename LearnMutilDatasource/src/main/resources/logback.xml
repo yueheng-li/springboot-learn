@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--ログファイルの保存パスを定義-->  
+    <property name="LOG_HOME" value="/usr/local/log/" />  
+    <!-- Console出力 -->   
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+             <!--フォーマット出力：%d日付，%thread，%-5level：ラベル%msg：ログ内容，%n改行--> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>   
+        </encoder> 
+    </appender>
+
+    <!-- dailyのログファイル作成 -->   
+    <appender name="file"  class="ch.qos.logback.core.rolling.RollingFileAppender">   
+        <file>${LOG_HOME}/datasource.log</file>  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--ログファイルの名称設定-->
+            <FileNamePattern>${LOG_HOME}/datasource.%d{yyyy-MM-dd}.log</FileNamePattern> 
+            <!--ファイル保存の日数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--フォーマット出力：%d日付，%thread，%-5level：ラベル%msg：ログ内容，%n改行--> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>   
+        </encoder> 
+    </appender> 
+
+    <!-- webのdailyのログファイル作成 -->   
+    <appender name="web"  class="ch.qos.logback.core.rolling.RollingFileAppender">   
+        <file>${LOG_HOME}/datasource-web.log</file>  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--ログファイルの名称設定-->
+            <FileNamePattern>${LOG_HOME}/datasource-web.%d{yyyy-MM-dd}.log</FileNamePattern> 
+            <!--ファイル保存の日数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--フォーマット出力：%d日付，%thread，%-5level：ラベル%msg：ログ内容，%n改行--> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>   
+        </encoder> 
+    </appender> 
+
+    <!-- dbのdailyのログファイル作成 -->   
+    <appender name="db"  class="ch.qos.logback.core.rolling.RollingFileAppender">   
+        <file>${LOG_HOME}/datasource-web-db.log</file>  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--ログファイルの名称設定-->
+            <FileNamePattern>${LOG_HOME}/datasource-web-db.%d{yyyy-MM-dd}.log</FileNamePattern> 
+            <!--ファイル保存の日数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--フォーマット出力：%d日付，%thread，%-5level：ラベル%msg：ログ内容，%n改行--> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>   
+        </encoder> 
+    </appender> 
+    
+    <!--web log configure start--> 
+<!--     <logger name="com.auto.myte.controller" level="INFO" additivity="false">   -->
+<!--         <appender-ref ref="web" />   -->
+<!--         <appender-ref ref="STDOUT" /> -->
+<!--     </logger>  -->
+    <!--web log configure end--> 
+    
+    <!--myibatis log configure start--> 
+    <logger name="com.apache.ibatis" level="TRACE" additivity="false">  
+        <appender-ref ref="db" />  
+        <appender-ref ref="STDOUT" />
+    </logger> 
+    <logger name="java.sql.Connection" level="DEBUG" additivity="false">  
+        <appender-ref ref="db" />  
+        <appender-ref ref="STDOUT" />
+    </logger> 
+    <logger name="java.sql.Statement" level="DEBUG" additivity="false">  
+        <appender-ref ref="db" />  
+        <appender-ref ref="STDOUT" />
+    </logger> 
+    <logger name="java.sql.PreparedStatement" level="DEBUG" additivity="false">  
+        <appender-ref ref="db" />  
+        <appender-ref ref="STDOUT" />
+    </logger> 
+    <logger name="cn.learn.mutil.datasource.dao" level="DEBUG" additivity="false">  
+        <appender-ref ref="db" />  
+        <appender-ref ref="STDOUT" />
+    </logger> 
+    <!--myibatis log configure end--> 
+    
+    <!-- ログ出力のラベル設定 -->
+    <root level="INFO">
+        <appender-ref ref="file" />
+        <appender-ref ref="STDOUT" />
+    </root> 
+</configuration>

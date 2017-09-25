@@ -14,4 +14,5 @@ autuator的使用，security的简单实用。
 * [springboot log Aspect处理（全局）](https://github.com/yueheng-li/springboot-learn/wiki/springboot-log-Aspect%E5%A4%84%E7%90%86)
 * [Spring Boot使用Druid或者Hiraki和监控配置（多数据源）](https://github.com/yueheng-li/springboot-learn/wiki/Spring-Boot%E4%BD%BF%E7%94%A8Druid%E6%88%96%E8%80%85Hiraki%E5%92%8C%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE%EF%BC%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%89)
 * [springboot 实现Filter的两种方式](https://github.com/yueheng-li/springboot-learn/wiki/springboot-%E5%AE%9E%E7%8E%B0Filter%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F)
+* [springboot 拦截器的实现方式](https://github.com/yueheng-li/springboot-learn/wiki/springboot-%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F)
 * [Activiti(work folw) 未完成](https://github.com/yueheng-li/springboot-learn/wiki/Activiti(work-folw))

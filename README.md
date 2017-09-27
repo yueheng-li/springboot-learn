@@ -21,3 +21,4 @@ autuator的使用，security的简单实用。
 ## spring boot Batch学习整理
 * [Spring Boot Batch（学习读取CSV写入到DB中）](https://github.com/yueheng-li/springboot-learn/wiki/Spring-Boot-Batch%EF%BC%88%E5%AD%A6%E4%B9%A0%E8%AF%BB%E5%8F%96CSV%E5%86%99%E5%85%A5%E5%88%B0DB%E4%B8%AD%EF%BC%89)
 * [Spring Boot Batch（学习读取CSV写入到DB中）之定时启动](https://github.com/yueheng-li/springboot-learn/wiki/Spring-Boot-Batch%EF%BC%88%E5%AD%A6%E4%B9%A0%E8%AF%BB%E5%8F%96CSV%E5%86%99%E5%85%A5%E5%88%B0DB%E4%B8%AD%EF%BC%89%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%90%AF%E5%8A%A8)
+* [Spring Boot Batch（学习读取CSV写入到DB中）之Validator](https://github.com/yueheng-li/springboot-learn/wiki/Spring-Boot-Batch%EF%BC%88%E5%AD%A6%E4%B9%A0%E8%AF%BB%E5%8F%96CSV%E5%86%99%E5%85%A5%E5%88%B0DB%E4%B8%AD%EF%BC%89%E4%B9%8BValidator)

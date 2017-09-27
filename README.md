@@ -16,3 +16,7 @@ autuator的使用，security的简单实用。
 * [springboot 实现Filter的两种方式](https://github.com/yueheng-li/springboot-learn/wiki/springboot-%E5%AE%9E%E7%8E%B0Filter%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F)
 * [springboot 拦截器的实现方式](https://github.com/yueheng-li/springboot-learn/wiki/springboot-%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F)
 * [Activiti(work folw) 未完成](https://github.com/yueheng-li/springboot-learn/wiki/Activiti(work-folw))
+
+
+## spring boot Batch学习整理
+* [Spring Boot Batch（学习读取CSV写入到DB中）](https://github.com/yueheng-li/springboot-learn/wiki/Spring-Boot-Batch%EF%BC%88%E5%AD%A6%E4%B9%A0%E8%AF%BB%E5%8F%96CSV%E5%86%99%E5%85%A5%E5%88%B0DB%E4%B8%AD%EF%BC%89)

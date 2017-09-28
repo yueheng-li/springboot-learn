@@ -1,0 +1,46 @@
+<bean:beans xmlns="http://www.springframework.org/schema/batch"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+    http://www.springframework.org/schema/batch/spring-batch-2.2.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+    ">
+
+	<!-- ############################################################################################## -->
+    <!-- 共通設定 -->
+	<!-- ############################################################################################## -->
+	<!-- spring batch context -->
+	<bean:bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+		<bean:property name="transactionManager" ref="transactionManager" />
+	</bean:bean>
+
+	<bean:bean id="transactionManager"
+		class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	<bean:bean id="jobLauncher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<bean:property name="jobRepository" ref="jobRepository" />
+	</bean:bean>
+
+	<bean:bean
+		class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+		<bean:property name="jobRegistry" ref="jobRegistry" />
+	</bean:bean>
+
+<!-- 	<bean:bean id="jobRegistry" -->
+<!-- 		class="org.springframework.batch.core.configuration.support.MapJobRegistry" /> -->
+
+<!-- 	<bean:bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> -->
+<!-- 		<bean:constructor-arg ref="sqlSessionFactory" /> -->
+<!-- 	</bean:bean> -->
+	<!-- spring batch context -->
+	
+	<!-- ############################################################################################## -->
+    <!-- Import設定 -->
+	<!-- ############################################################################################## -->
+    <bean:import resource="/jobxml/importTxtToDb.xml"/>
+
+</bean:beans>

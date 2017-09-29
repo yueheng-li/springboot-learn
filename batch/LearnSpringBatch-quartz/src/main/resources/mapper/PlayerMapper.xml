@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.learn.spring.batch.mapper.PlayerMapper">
+	<resultMap id="BaseResultMap" type="cn.learn.spring.batch.domain.Player">
+		<result column="PLAYER_ID" property="id" />
+		<result column="LAST_NAME" property="lastName" />
+		<result column="FIRST_NAME" property="firstName" />
+		<result column="POS" property="position" />
+		<result column="YEAR_OF_BIRTH" property="birthYear" />
+		<result column="YEAR_DRAFTED" property="debutYear" />
+	</resultMap>
+	<insert id="insertPlayer" parameterType="cn.learn.spring.batch.domain.Player">
+		INSERT into PLAYERS (player_id, last_name, first_name, pos, year_of_birth, year_drafted)
+		values(
+		#{id,jdbcType=VARCHAR},
+		#{lastName,jdbcType=INTEGER},
+		#{firstName,jdbcType=INTEGER},
+		#{position,jdbcType=INTEGER},
+		#{birthYear,jdbcType=INTEGER},
+		#{debutYear,jdbcType=INTEGER});
+	</insert>
+
+</mapper>

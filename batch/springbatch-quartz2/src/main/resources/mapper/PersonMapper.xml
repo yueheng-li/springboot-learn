@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.learn.spring.batch.mapper.PeopleMapper">
+	<resultMap id="BaseResultMap" type="cn.learn.spring.batch.domain.Person">
+		<result column="first_name" property="firstName" />
+		<result column="last_name" property="lastName" />
+		<result column="person_id" property="personid" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="BaseResultMap" >
+		select first_name
+		,last_name
+		from people
+	</select>
+	
+	<select id="selectByPersonId" resultMap="BaseResultMap"  parameterType="java.util.Map">
+		SELECT person_id, first_Name, last_Name 
+		FROM people
+		WHERE person_id &gt;= #{fromId}  and person_id &lt;= #{toId}
+		ORDER BY person_id ASC LIMIT 1000
+	</select>
+
+	<insert id="insertPerson" parameterType="cn.learn.spring.batch.domain.Person">
+		insert into
+		people (first_name, last_name)
+		values(
+		#{firstName,jdbcType=VARCHAR},
+		#{lastName,jdbcType=VARCHAR});
+	</insert>
+
+</mapper>

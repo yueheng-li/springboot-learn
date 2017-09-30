@@ -1,0 +1,136 @@
+<bean:beans xmlns="http://www.springframework.org/schema/batch"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+    http://www.springframework.org/schema/batch/spring-batch-2.2.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+    ">
+	<!-- parent task -->
+	<step id="baseStep" abstract="true">
+		<tasklet>
+			<listeners>
+				<listener>
+					<bean class="cn.learn.spring.batch.common.SkipCheckingListener"
+						xmlns="http://www.springframework.org/schema/beans" />
+				</listener>
+				<listener>
+					<bean
+						class="org.springframework.batch.core.listener.ExecutionContextPromotionListener"
+						xmlns="http://www.springframework.org/schema/beans">
+						<property name="keys">
+							<list>
+								<value>stepName</value>
+							</list>
+						</property>
+					</bean>
+				</listener>
+			</listeners>
+		</tasklet>
+	</step>
+
+
+	<job id="skipJob">
+		<step id="skipJob.step0" parent="baseStep">
+			<tasklet>
+				<chunk reader="fileItemReader" processor="playerProcessor"
+					writer="skipItemWriter" commit-interval="3" skip-limit="10">
+					<skippable-exception-classes>
+						<include
+							class="org.springframework.batch.item.file.FlatFileParseException" />
+						<include class="org.springframework.batch.item.WriteFailedException" />
+					</skippable-exception-classes>
+				</chunk>
+			</tasklet>
+
+
+			<end on="*" />
+			<next on="COMPLETED WITH SKIPS" to="errorPrint1" />
+			<fail on="FAILED" exit-code="FAILED" />
+		</step>
+
+
+		<step id="errorPrint1">
+			<tasklet ref="errorLogTasklet" />
+		</step>
+	</job>
+
+
+	<!-- ############################################################################################## -->
+	<!-- step.playerload start -->
+	<!-- ############################################################################################## -->
+	<!-- reader -->
+	<bean:bean id="fileItemReader"
+		class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+		<bean:property name="resource" value="classpath:data/skip/skip_1.csv" />
+		<bean:property name="lineMapper">
+			<bean:bean
+				class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<bean:property name="lineTokenizer">
+					<bean:bean
+						class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<bean:property name="delimiter" value="," />
+						<bean:property name="names"
+							value="ID,lastName,firstName,position,birthYear,debutYear" />
+					</bean:bean>
+				</bean:property>
+				<bean:property name="fieldSetMapper">
+					<bean:bean
+						class="cn.learn.spring.batch.field.mapper.PlayerFieldSetMapper" />
+				</bean:property>
+			</bean:bean>
+		</bean:property>
+	</bean:bean>
+
+	<!-- processor -->
+	<bean:bean id="playerProcessor"
+		class="cn.learn.spring.batch.processor.PlayerItemProcessor" scope="step">
+	</bean:bean>
+
+	<!-- writer -->
+	<bean:bean id="skipItemWriter" class="cn.learn.spring.batch.writer.SkipItemWriter">
+		<bean:property name="failingPlayer">
+			<bean:list>
+<!-- 				<bean:value>AsheJa00</bean:value> -->
+				<bean:value>AshtJo00</bean:value>
+				<bean:value>AskaJo00</bean:value>
+			</bean:list>
+		</bean:property>
+	</bean:bean>
+
+	<!-- error tasklet -->
+	<bean:bean id="errorLogTasklet" class="cn.learn.spring.batch.common.ErrorLogTasklet"
+		scope="step">
+	</bean:bean>
+	<!-- ############################################################################################## -->
+	<!-- step.playerload end -->
+	<!-- ############################################################################################## -->
+
+
+	<!-- run every 10 seconds -->
+	<!-- ############################################################################################## -->
+	<!-- trigger 30ミニターごと起動 -->
+	<!-- ############################################################################################## -->
+	<bean:bean id="skipJobCronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<bean:property name="jobDetail" ref="skipJob1" />
+		<bean:property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean:bean>
+
+	<bean:bean id="skipJob1"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<bean:property name="jobClass"
+			value="cn.learn.spring.batch.JobLauncherDetails" />
+		<bean:property name="group" value="quartz-batch" />
+		<bean:property name="jobDataAsMap">
+			<bean:map>
+				<bean:entry key="jobName" value="skipJob" />
+				<bean:entry key="jobLocator" value-ref="jobRegistry" />
+				<bean:entry key="jobLauncher" value-ref="jobLauncher" />
+			</bean:map>
+		</bean:property>
+	</bean:bean>
+	<!-- ############################################################################################## -->
+</bean:beans>

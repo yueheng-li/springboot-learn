@@ -1,0 +1,80 @@
+<bean:beans xmlns="http://www.springframework.org/schema/batch"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+    http://www.springframework.org/schema/batch/spring-batch-2.2.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+    ">
+	<job id="importTxtToDbJob" >
+		<step id="step1">
+			<tasklet>
+				<chunk reader="personFileItemReader" writer="personWriter" processor="personItemProcessor"
+				       commit-interval="1"/>
+			</tasklet>
+		</step>
+	</job>
+	
+	<bean:bean id="personFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<bean:property name="resource"
+			value="classpath:data/ImportPersonDataStep.txt" />
+		<bean:property name="lineMapper">
+			<bean:bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<bean:property name="lineTokenizer" ref="personTokenizer" />
+				<bean:property name="fieldSetMapper" ref="personFieldSetMapper" />
+			</bean:bean>
+		</bean:property>
+	</bean:bean>
+
+	<bean:bean id="personTokenizer" class="org.springframework.batch.item.file.transform.FixedLengthTokenizer">
+		<bean:property name="names"
+			value="Title, FirstName, LastName, Age, Address.AddrLine1, children[0].name, children[1].name" />
+		<bean:property name="columns" value="1-5, 6-20, 21-40, 41-45, 46-55, 56-65, 66-75" />
+	</bean:bean>
+
+	<bean:bean id="personFieldSetMapper" class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+		<bean:property name="prototypeBeanName" value="person" />
+	</bean:bean>
+
+	<bean:bean id="person" class="cn.learn.spring.batch.domain.Person" scope="prototype" />
+
+	<!-- 驗證定义 -->
+	<bean:bean id="fixedValidator" class="org.springframework.batch.item.validator.SpringValidator">
+		<bean:property name="validator">
+            <bean:bean class="cn.learn.spring.batch.processor.validator.PersonValidator"/>
+		</bean:property>
+	</bean:bean>
+
+	<bean:bean id="personItemProcessor" class="org.springframework.batch.item.validator.ValidatingItemProcessor">
+		<bean:constructor-arg ref="fixedValidator" />
+	</bean:bean>
+
+	<bean:bean id="personWriter" class="cn.learn.spring.batch.writer.PersonWriter" />
+	
+	
+	<!-- run every 10 seconds -->
+	<!-- ############################################################################################## -->
+	<!-- trigger 10分ごと起動 -->
+	<!-- ############################################################################################## -->
+	<bean:bean id="importtxtToDbCronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<bean:property name="jobDetail" ref="importtxtToDbJob" />
+		<bean:property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean:bean>
+
+	<bean:bean id="importtxtToDbJob"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<bean:property name="jobClass"
+			value="cn.learn.spring.batch.JobLauncherDetails" />
+		<bean:property name="group" value="quartz-batch" />
+		<bean:property name="jobDataAsMap">
+			<bean:map>
+				<bean:entry key="jobName" value="importTxtToDbJob" />
+				<bean:entry key="jobLocator" value-ref="jobRegistry" />
+				<bean:entry key="jobLauncher" value-ref="jobLauncher" />
+			</bean:map>
+		</bean:property>
+	</bean:bean>
+	<!-- ############################################################################################## -->
+</bean:beans>

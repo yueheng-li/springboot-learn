@@ -17,7 +17,7 @@ autuator的使用，security的简单实用。
 * [springboot 实现Filter的两种方式](https://github.com/yueheng-li/springboot-learn/wiki/springboot-%E5%AE%9E%E7%8E%B0Filter%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F)
 * [springboot 拦截器的实现方式](https://github.com/yueheng-li/springboot-learn/wiki/springboot-%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F)
 * [Activiti(work folw) 未完成](https://github.com/yueheng-li/springboot-learn/wiki/Activiti(work-folw))
-
+* [SpringBoot 自动生成mybatis用的文件设置](https://github.com/yueheng-li/springboot-learn/wiki/SpringBoot-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90mybatis%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE)
 
 ## spring boot Batch学习整理
 * [Spring Batch参考文档中文版](https://www.gitbook.com/book/kimmking/springbatchreference/details)

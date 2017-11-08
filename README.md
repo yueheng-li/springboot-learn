@@ -19,6 +19,7 @@ autuator的使用，security的简单实用。
 * [Activiti(work folw) 未完成](https://github.com/yueheng-li/springboot-learn/wiki/Activiti(work-folw))
 * [SpringBoot 自动生成mybatis用的文件设置](https://github.com/yueheng-li/springboot-learn/wiki/SpringBoot-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90mybatis%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE)
 * [TODO SNMP4j](https://blog.gmem.cc/snmp4j-study-note)
+* [TODO js--webSocket入门](http://www.cnblogs.com/lxtblogs/p/4947898.html)
 * [正则表达式](http://www.cnblogs.com/liun1994/p/7047472.html)
 
 ## spring boot Batch学习整理

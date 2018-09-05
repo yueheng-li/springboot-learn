@@ -31,3 +31,5 @@ autuator的使用，security的简单实用。
 
 ## spring cloud
 * [微服务架构集大成者—Spring Cloud](https://www.jianshu.com/p/3899d7f47303?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation)
+* [Spring Cloud系类文章](https://www.jianshu.com/u/d937c43c142b)
+
